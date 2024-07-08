@@ -21,6 +21,8 @@ class TextNode:
 teste_classe = TextNode("texto de exemplo", "texto é um header")
 teste_classe2 = TextNode("texto de exemplo", "texto é um header")
 
+
+
 # print(teste_classe.__repr__())
 # print(teste_classe2.__repr__())
 
