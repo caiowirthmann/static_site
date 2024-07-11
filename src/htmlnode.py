@@ -49,7 +49,7 @@ def text_node_html_converter(TextNode):
         node_code = HTMLnode("code", TextNode.text, None, None)
         return node_code
     if TextNode.text_type == text_type_link:
-        node_link = HTMLnode("a", TextNode.text, None) # <--- completar
+        node_link = HTMLnode("a", TextNode.text, None) # <--- completar metodo
         return node_link
     if TextNode.text_type == text_type_image:
         node_image = HTMLnode("code", )
