@@ -1,22 +1,3 @@
-from textnode import (
-    TextNode,
-    text_type_text,
-    text_type_bold,
-    text_type_italic,
-    text_type_code,
-    text_type_image,
-    text_type_link,
-)
-
-text_type_list = [
-    text_type_text,
-    text_type_bold,
-    text_type_italic,
-    text_type_code,
-    text_type_image,
-    text_type_link
-]
-
 # text_type_text: This should become a LeafNode with no tag, just a raw text value.
 # text_type_bold: This should become a LeafNode with a "b" tag and the text
 # text_type_italic: "i" tag, text
@@ -29,34 +10,6 @@ text_type_list = [
 
 # function that will convert TextNode.text_type to a HTMLnode
 #
-def text_node_to_html_node(TextNode):
-    if TextNode.text_type not in text_type_list:
-        raise Exception ("Text Type does not match any available type. Check TextNode.text_type attribute")
-    text_node_html_converter(TextNode)
-    pass
-
-def text_node_html_converter(TextNode):
-    if TextNode.text_type == text_type_text:
-        node_text = LeafNode(None, TextNode.text)
-        return node_text
-    if TextNode.text_type == text_type_bold:
-        node_bold = LeafNode("b", TextNode.text)
-        return node_bold
-    if TextNode.text_type == text_type_italic:
-        node_italic = HTMLnode("i", TextNode.text, None, None)
-        return node_italic
-    if TextNode.text_type == text_type_code:
-        node_code = HTMLnode("code", TextNode.text, None, None)
-        return node_code
-    if TextNode.text_type == text_type_link:
-        node_link = HTMLnode("a", TextNode.text, None) # <--- completar metodo
-        return node_link
-    if TextNode.text_type == text_type_image:
-        node_image = HTMLnode("code", )
-        return node_image
-    
-
-
 
 class HTMLnode:
     def __init__(self, tag=None, value=None, children=None, props=None):        
@@ -78,7 +31,8 @@ class HTMLnode:
         for prop in self.props:
           props_html += f' {prop}="{self.props[prop]}"'
         return props_html
-    
+
+
 
 class LeafNode(HTMLnode):
     def __init__(self, tag, value, props=None):
@@ -126,7 +80,7 @@ class ParentNode(HTMLnode):
         children_html = ""
         for child in self.children:
             children_html += child.to_html()
-        return f"<{self.tag}{self.props.to_html()}>{children_html}</{self.tag}>"
+        return f"<{self.tag}{self.props_to_html()}>{children_html}</{self.tag}>"
 
-testLeaf = LeafNode(None ,"click me!", {"href" : "https://google.com"})
-print(testLeaf.__repr__())
+# testLeaf = LeafNode(None ,"click me!", {"href" : "https://google.com"})
+# print(testLeaf.__repr__())

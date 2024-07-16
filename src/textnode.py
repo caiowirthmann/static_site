@@ -1,3 +1,5 @@
+from htmlnode import LeafNode
+
 text_type_text = "text"
 text_type_bold = "bold"
 text_type_italic = "italic"
@@ -20,6 +22,23 @@ class TextNode:
 
 teste_classe = TextNode("texto de exemplo", "texto é um header")
 teste_classe2 = TextNode("texto de exemplo", "texto é um header")
+
+
+    
+def text_node_to_html_node(TextNode):
+    if TextNode.text_type == text_type_text:
+        return LeafNode(None, TextNode.text)
+    if TextNode.text_type == text_type_bold:
+        return LeafNode("b", TextNode.text)
+    if TextNode.text_type == text_type_italic:
+        return LeafNode("i", TextNode.text, None, None)
+    if TextNode.text_type == text_type_code:
+        return LeafNode("code", TextNode.text, None, None)
+    if TextNode.text_type == text_type_link:
+        return LeafNode("a", TextNode.text, None, {"href" : TextNode.url}) # <--- completar metodo
+    if TextNode.text_type == text_type_image:
+        return LeafNode("img", None, None, {"src" : TextNode.url, "alt" : TextNode.text})
+    raise Exception (f"Text Type {TextNode.text_type} does not match any available type. Check TextNode.text_type attribute")
 
 
 
